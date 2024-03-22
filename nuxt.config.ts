@@ -21,6 +21,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/color-mode",
 		"@nuxtjs/google-fonts",
 		"@pinia/nuxt",
+		"dayjs-nuxt",
 	],
 	shadcn: {
 		/**

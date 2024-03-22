@@ -1,7 +1,7 @@
-type AuthStore = {
+interface AuthStore {
 	accessToken?: string | null;
 	refreshToken?: string | null;
-};
+}
 
 const ACCESS_TOKEN_KEY = "at";
 const REFRESH_TOKEN_KEY = "rt";
@@ -55,13 +55,30 @@ export default defineStore("auth", {
 
 			// Init cookies for tokens
 			// and set values from response
-			const at = useCookie(ACCESS_TOKEN_KEY);
-			const rt = useCookie(REFRESH_TOKEN_KEY);
+			const at = useCookie(ACCESS_TOKEN_KEY, {
+				expires: response.value?.data.expiresAt,
+				sameSite: "strict",
+				httpOnly: true,
+				secure: true,
+			});
+			const rt = useCookie(REFRESH_TOKEN_KEY, {
+				// expires: response.value?.data.expiresAt,
+				sameSite: "strict",
+				httpOnly: true,
+				secure: true,
+			});
 
 			at.value = this.accessToken;
 			rt.value = this.refreshToken;
 
 			return response;
+		},
+
+		isLoggedIn() {
+			const at = useCookie(ACCESS_TOKEN_KEY).value;
+			if (!at) false;
+
+			return true;
 		},
 	},
 
