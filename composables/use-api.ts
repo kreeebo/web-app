@@ -1,5 +1,3 @@
-import type { UseFetchOptions } from "nuxt/app";
-
 interface ResponseMeta {
 	success: boolean;
 	code: number;
@@ -12,11 +10,12 @@ type Response<T> = {
 	data: T;
 };
 
-export default async function useApi<T>(uri: string, options: UseFetchOptions<Response<T>>) {
+export default async function useApi<T>(
+	request: Parameters<typeof $fetch<T>>[0],
+	options: Parameters<typeof $fetch<Response<T>>>[1]
+) {
 	const config = useRuntimeConfig();
-
-	return useFetch(uri, {
-		...options,
-		baseURL: config.public.apiBaseUrl,
-	}).then((res) => res.data);
+	return $fetch<Response<T>>(request, { ...options, baseURL: config.public.apiBaseUrl }).then(
+		(response) => response.data
+	);
 }

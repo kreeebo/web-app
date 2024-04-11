@@ -8,7 +8,7 @@ import {
 	SelectViewport,
 	useForwardPropsEmits,
 } from "radix-vue";
-import { SelectScrollDownButton, SelectScrollUpButton } from ".";
+import { SelectScrollDownButton, SelectScrollUpButton, selectContentVariants, type SelectVariants } from ".";
 import { cn } from "@/lib/utils";
 
 defineOptions({
@@ -16,7 +16,10 @@ defineOptions({
 });
 
 const props = withDefaults(
-	defineProps<SelectContentProps & { class?: HTMLAttributes["class"] }>(),
+	defineProps<SelectContentProps & {
+		class?: HTMLAttributes["class"];
+		variant?: SelectVariants['variant']
+	}>(),
 	{
 		position: "popper",
 	}
@@ -34,27 +37,20 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
 
 <template>
 	<SelectPortal>
-		<SelectContent
-			v-bind="{ ...forwarded, ...$attrs }"
-			:class="
-				cn(
-					'relative z-50 max-h-96 min-w-32 overflow-hidden rounded-lg  shadow-md data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:bg-jet-black dark:text-white',
-					position === 'popper' &&
-						'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
-					props.class
-				)
-			"
-		>
+		<SelectContent v-bind="{ ...forwarded, ...$attrs }" :class="cn(
+			selectContentVariants(),
+			position === 'popper' &&
+			'data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1',
+			props.class
+		)
+			">
 			<SelectScrollUpButton />
-			<SelectViewport
-				:class="
-					cn(
-						'p-1',
-						position === 'popper' &&
-							'h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]'
-					)
-				"
-			>
+			<SelectViewport :class="cn(
+			'p-1',
+			position === 'popper' &&
+			'h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]'
+		)
+			">
 				<slot />
 			</SelectViewport>
 			<SelectScrollDownButton />

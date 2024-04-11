@@ -1,6 +1,6 @@
 <template>
 	<NuxtLink
-		class="group flex flex-col h-[95px] max-w-[120px] w-full items-center justify-center gap-2 transition-colors hover:bg-jet-black rounded-2xl"
+		class="group flex flex-col h-[95px] w-[95px] items-center justify-center gap-2 transition-colors duration-100 hover:bg-jet-black rounded-2xl"
 		:class="{
 			'bg-jet-black': isActive,
 		}"
@@ -36,4 +36,6 @@ interface Props {
 }
 
 const props = defineProps<Props>();
+
+const isActive = computed<boolean>(() => props.isActive);
 </script>

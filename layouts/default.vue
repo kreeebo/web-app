@@ -1,23 +1,22 @@
 <template>
-	<NuxtLoadingIndicator />
-	<div class="dark:bg-eerie-black h-dvh w-full">
+	<div class="flex dark:bg-eerie-black h-dvh w-full dark:text-white">
 		<NavigationContainer image="/images/common/icon-dark-logo.svg">
 			<NavigationItem
 				v-for="item in navigationMenu"
-				:is-active="item.link === currentRoute"
+				:key="item.label"
+				:is-active="item.link === $route.path"
 				:navigation-item="item"
 			/>
 		</NavigationContainer>
 
-		<main>
+		<LazyNuxtLoadingIndicator color="#d9ff44" />
+		<main class="w-full p-8">
 			<slot />
 		</main>
 	</div>
 </template>
 
 <script setup lang="ts">
-const { path: currentRoute } = useRoute();
-
 const navigationMenu = [
 	{
 		label: "Dashboard",

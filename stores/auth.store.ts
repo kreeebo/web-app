@@ -24,6 +24,8 @@ interface VerifyOtpResponse {
 	refreshToken: string;
 	firstName: string;
 	lastName: string;
+	hasOrganisation: boolean;
+	hasSubscription: boolean;
 }
 
 export default defineStore("auth", {
@@ -50,13 +52,13 @@ export default defineStore("auth", {
 			});
 
 			// set tokens to application state
-			this.accessToken = response.value?.data.token;
-			this.refreshToken = response.value?.data.refreshToken;
+			this.accessToken = response.token;
+			this.refreshToken = response.refreshToken;
 
 			// Init cookies for tokens
 			// and set values from response
 			const at = useCookie(ACCESS_TOKEN_KEY, {
-				expires: response.value?.data.expiresAt,
+				expires: response.expiresAt,
 				sameSite: "strict",
 				httpOnly: true,
 				secure: true,
