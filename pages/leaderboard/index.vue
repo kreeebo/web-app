@@ -2,8 +2,7 @@
 	<h1>Leaderboard</h1>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
 definePageMeta({
-	middleware: "auth",
 });
 </script>

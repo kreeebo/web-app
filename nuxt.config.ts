@@ -1,8 +1,19 @@
+import mkcert from "vite-plugin-mkcert";
+import path from "path";
+import process from "process";
+
 // https://nuxt.com/docs/api/configuration/nuxt-config
 export default defineNuxtConfig({
 	devtools: { enabled: false },
 	app: {
-		pageTransition: { name: "page", mode: "out-in", duration: { enter: 200, leave: 200 } },
+		pageTransition: { name: "page", mode: "out-in" },
+	},
+	devServer: {
+		port: 3001,
+		https: {
+			key: `${process.cwd()}/.vite-plugin-mkcert/localhost`,
+			cert: `${process.cwd()}/.vite-plugin-mkcert/localhost`,
+		},
 	},
 	runtimeConfig: {
 		public: {
@@ -14,6 +25,13 @@ export default defineNuxtConfig({
 			customElement: true,
 		},
 		vueJsx: { mergeProps: true },
+		plugins: [
+			mkcert({
+				savePath: ".vite-plugin-mkcert",
+				certFileName: "localhost",
+				keyFileName: "localhost",
+			}),
+		],
 	},
 	modules: [
 		"@nuxtjs/tailwindcss",
@@ -22,6 +40,7 @@ export default defineNuxtConfig({
 		"@nuxtjs/google-fonts",
 		"@pinia/nuxt",
 		"dayjs-nuxt",
+		"@nuxt/image",
 	],
 	shadcn: {
 		/**

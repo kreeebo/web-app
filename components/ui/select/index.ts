@@ -1,65 +1,71 @@
-export { default as Select } from "./Select.vue";
-export { default as SelectValue } from "./SelectValue.vue";
-export { default as SelectTrigger } from "./SelectTrigger.vue";
-export { default as SelectContent } from "./SelectContent.vue";
-export { default as SelectGroup } from "./SelectGroup.vue";
-export { default as SelectItem } from "./SelectItem.vue";
-export { default as SelectItemText } from "./SelectItemText.vue";
-export { default as SelectLabel } from "./SelectLabel.vue";
-export { default as SelectSeparator } from "./SelectSeparator.vue";
-export { default as SelectScrollUpButton } from "./SelectScrollUpButton.vue";
-export { default as SelectScrollDownButton } from "./SelectScrollDownButton.vue";
+import { type VariantProps, cva } from 'class-variance-authority';
 
-import { type VariantProps, cva } from "class-variance-authority";
-
-export const selectVariants = cva(
-	"flex h-16 w-full items-center justify-between px-3 pt-3 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50 [&>span]:line-clamp-1 placeholder:text-[#9ca3af]",
-	{
-		variants: {
-			variant: {
-				default: "dark:bg-jet-black dark:text-white  dark:bg-jet-black",
-				dark: "dark:bg-eerie-black dark:text-white placeholder:text-white placeholder:font-normal",
-			},
-			radius: {
-				default: "rounded-lg",
-				large: "rounded-[24px]",
-			},
-			size: {
-				default: "h-16",
-				small: "h-12 pt-0 px-4",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-			radius: "default",
-			size: "default",
-		},
-	}
-);
+export { default as Select } from './Select.vue';
+export { default as SelectValue } from './SelectValue.vue';
+export { default as SelectTrigger } from './SelectTrigger.vue';
+export { default as SelectContent } from './SelectContent.vue';
+export { default as SelectGroup } from './SelectGroup.vue';
+export { default as SelectItem } from './SelectItem.vue';
+export { default as SelectItemText } from './SelectItemText.vue';
+export { default as SelectLabel } from './SelectLabel.vue';
+export { default as SelectSeparator } from './SelectSeparator.vue';
+export { default as SelectScrollUpButton } from './SelectScrollUpButton.vue';
+export { default as SelectScrollDownButton } from './SelectScrollDownButton.vue';
 
 export const selectContentVariants = cva(
-	"relative z-50 max-h-96 min-w-32 overflow-hidden rounded-lg data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=closed]:fade-out-0 data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 data-[side=right]:slide-in-from-left-2 data-[side=top]:slide-in-from-bottom-2 dark:bg-jet-black dark:text-white",
-	{
-		variants: {
-			variant: {
-				default: "dark:bg-jet-black dark:text-white  dark:bg-jet-black",
-				dark: "dark:bg-eerie-black dark:text-white placeholder:text-white placeholder:font-normal",
-			},
-			radius: {
-				default: "rounded-lg",
-				large: "rounded-[24px]",
-			},
-			size: {
-				default: "h-16",
-				small: "h-12 pt-0 px-4",
-			},
-		},
-		defaultVariants: {
-			variant: "default",
-			radius: "default",
-			size: "default",
-		},
-	}
+  `tw-relative tw-z-50 tw-max-h-96 tw-min-w-32 tw-overflow-hidden
+    tw-rounded-2xl 
+    tw-text-base tw-data-[state=open]:animate-in tw-py-4
+    data-[state=closed]:tw-animate-out data-[state=closed]:tw-fade-out-0 
+    data-[state=open]:tw-fade-in-0 data-[state=closed]:tw-zoom-out-95 data-[state=open]:tw-zoom-in-95 
+    data-[side=bottom]:tw-slide-in-from-top-2 data-[side=left]:tw-slide-in-from-right-2 
+    data-[side=right]:tw-slide-in-from-left-2 data-[side=top]:-tw-slide-in-from-bottom-2`,
+  {
+    variants: {
+      variant: {
+        outlined: 'tw-bg-[#3D3D3D] tw-text-white',
+      },
+    },
+    defaultVariants: {
+      variant: 'outlined',
+    },
+  }
 );
 
-export type SelectVariants = VariantProps<typeof selectVariants>;
+export const selectTriggerVariants = cva(
+  `tw-flex tw-h-10 tw-w-full tw-items-center tw-justify-between data-[disabled]:tw-opacity-60 data-[disabled]:tw-cursor-not-allowed
+      tw-px-8 tw-pr-0 tw-py-2 tw-text-base tw-max-w-max focus:tw-outline-none`,
+  {
+    variants: {
+      variant: {
+        outlined: 'tw-border tw-border-white tw-border-solid tw-rounded-[2rem]',
+        solid: 'ts',
+      },
+      size: {
+        md: 'tw-h-12',
+      },
+    },
+    defaultVariants: {
+      variant: 'solid',
+      size: 'md',
+    },
+  }
+);
+
+export const selectItemVariants = cva(
+  'tw-relative tw-flex tw-cursor-default tw-select-none tw-items-start tw-rounded tw-py-1.5 tw-mx-4 tw-px-4 tw-outline-none focus:tw-bg-jet-black focus:tw-text-white data-[disabled]:tw-cursor-not-allowed data-[disabled]:tw-opacity-50',
+  {
+    variants: {
+      variant: {
+        outline: 'focus:tw-bg-jet-black',
+      },
+    },
+    defaultVariants: {
+      variant: 'outline',
+    },
+  }
+);
+
+export type SelectTriggerVariants = VariantProps<typeof selectTriggerVariants>;
+export type SelectContentVariants = VariantProps<typeof selectContentVariants>;
+export type SelectItemVariants = VariantProps<typeof selectItemVariants>;

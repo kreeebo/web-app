@@ -35,10 +35,12 @@ export default defineStore("auth", {
 	}),
 	actions: {
 		async login(body: LoginRequest) {
-			const response = await useApi("/v1/authentication/otp/login", {
+			const response = await useApi<VerifyOtpResponse>("/v1/authentication/otp/login", {
 				method: "post",
 				body,
 			});
+
+			console.log(response);
 
 			return response;
 		},
@@ -52,19 +54,19 @@ export default defineStore("auth", {
 			});
 
 			// set tokens to application state
-			this.accessToken = response.token;
-			this.refreshToken = response.refreshToken;
+			this.accessToken = response?.token;
+			this.refreshToken = response?.refreshToken;
 
 			// Init cookies for tokens
 			// and set values from response
 			const at = useCookie(ACCESS_TOKEN_KEY, {
-				expires: response.expiresAt,
+				expires: response?.expiresAt,
 				sameSite: "strict",
 				httpOnly: true,
 				secure: true,
 			});
 			const rt = useCookie(REFRESH_TOKEN_KEY, {
-				// expires: response.value?.data.expiresAt,
+				// expires: response.expiresAt.,
 				sameSite: "strict",
 				httpOnly: true,
 				secure: true,
@@ -78,7 +80,9 @@ export default defineStore("auth", {
 
 		isLoggedIn() {
 			const at = useCookie(ACCESS_TOKEN_KEY).value;
-			if (!at) false;
+			if (!at) {
+				return false;
+			}
 
 			return true;
 		},

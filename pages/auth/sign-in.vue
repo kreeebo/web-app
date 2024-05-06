@@ -26,12 +26,12 @@
 			</Button>
 		</form>
 
-		<NuxtLink href="/auth/sign-up">Don’t have an account? Sign up</NuxtLink>
+		<NuxtLink to="/auth/sign-up">Don’t have an account? Sign up</NuxtLink>
 	</div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "auth" });
+definePageMeta({ layout: "auth", pageTransition: { name: "page" } });
 
 import { Form, useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";

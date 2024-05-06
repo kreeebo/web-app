@@ -54,12 +54,12 @@
 			<Button type="submit" class="mx-auto">Submit</Button>
 		</form>
 
-		<NuxtLink href="/auth/sign-up">Don’t have an account? Sign up</NuxtLink>
+		<NuxtLink to="/auth/sign-in">Already have an account? Sign in</NuxtLink>
 	</div>
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "auth" });
+definePageMeta({ layout: "auth", pageTransition: { name: "page" } });
 
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";

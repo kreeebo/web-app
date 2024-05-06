@@ -1,39 +1,30 @@
 <script setup lang="ts">
-import { type HTMLAttributes, computed } from 'vue'
-import {
-  SelectItem,
-  SelectItemIndicator,
-  type SelectItemProps,
-  SelectItemText,
-  useForwardProps,
-} from 'radix-vue'
-import { Check } from 'lucide-vue-next'
-import { cn } from '@/lib/utils'
+import { type HTMLAttributes, computed } from 'vue';
+import { SelectItem, SelectItemIndicator, type SelectItemProps, SelectItemText, useForwardProps } from 'radix-vue';
+import { cn } from '@/lib/utils';
+import { SelectItemVariants, selectItemVariants } from '.';
 
-const props = defineProps<SelectItemProps & { class?: HTMLAttributes['class'] }>()
+const props = defineProps<
+  SelectItemProps & {
+    class?: HTMLAttributes['class'];
+    variant?: SelectItemVariants['variant'];
+  }
+>();
 
 const delegatedProps = computed(() => {
-  const { class: _, ...delegated } = props
+  const { class: _, ...delegated } = props;
 
-  return delegated
-})
+  return delegated;
+});
 
-const forwardedProps = useForwardProps(delegatedProps)
+const forwardedProps = useForwardProps(delegatedProps);
 </script>
 
 <template>
-  <SelectItem
-    v-bind="forwardedProps"
-    :class="
-      cn(
-        'relative flex w-full cursor-default select-none items-center py-1.5 pl-8 pr-2 outline-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 dark:focus:bg-eerie-black dark:focus:rounded-lg dark:focus:text-slate-50',
-        props.class,
-      )
-    "
-  >
-    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
+  <SelectItem v-bind="forwardedProps" :class="cn(selectItemVariants({ variant }), props.class)">
+    <span class="tw-absolute tw-left-2 tw-flex tw-h-3.5 tw-w-3.5 tw-items-center tw-justify-center">
       <SelectItemIndicator>
-        <Check class="h-4 w-4" />
+        <!-- <Check class="tw-h-4 tw-w-4" /> -->
       </SelectItemIndicator>
     </span>
 
