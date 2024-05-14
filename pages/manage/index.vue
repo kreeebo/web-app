@@ -3,8 +3,13 @@
 		<div class="flex flex-col gap-5 w-full">
 			<div class="flex">
 				<div class="flex gap-1 flex-1 items-center">
-					<Input variant="dark" size="comfortable" rounded="smooth"
-						placeholder="Invite by email, split by comma" class="min-w-[340px] sm:min-w-auto" />
+					<Input
+						variant="dark"
+						size="comfortable"
+						rounded="smooth"
+						placeholder="Invite by email, split by comma"
+						class="min-w-[340px] sm:min-w-auto"
+					/>
 					<Button class="w-auto px-5" size="lg">Invite</Button>
 				</div>
 				<div class="flex gap-4 items-center">
@@ -18,7 +23,7 @@
 			<div class="flex gap-2">
 				<div class="flex gap-2 flex-1">
 					<Select label="a" variant="dark" radius="large">
-						<SelectTrigger variant="dark" radius="large" size="small" class="w-[140px]">
+						<SelectTrigger class="w-[140px]">
 							<SelectValue placeholder="Team" />
 						</SelectTrigger>
 						<SelectContent>
@@ -33,7 +38,7 @@
 						</SelectContent>
 					</Select>
 					<Select label="a" variant="dark" radius="large">
-						<SelectTrigger variant="dark" radius="large" size="small" class="w-[140px]">
+						<SelectTrigger class="w-[140px]">
 							<SelectValue placeholder="Division" />
 						</SelectTrigger>
 						<SelectContent>
@@ -48,7 +53,7 @@
 						</SelectContent>
 					</Select>
 					<Select label="a" variant="dark" radius="large">
-						<SelectTrigger variant="dark" radius="large" size="small" class="w-[140px]">
+						<SelectTrigger class="w-[140px]">
 							<SelectValue placeholder="Country" />
 						</SelectTrigger>
 						<SelectContent>
@@ -65,8 +70,15 @@
 				</div>
 				<div>
 					<div class="relative w-[340px] max-w-sm items-center">
-						<Input variant="dark" size="comfortable" rounded="smooth" id="search" type="text"
-							placeholder="Search..." class="pr-6 px-5" />
+						<Input
+							variant="dark"
+							size="comfortable"
+							rounded="smooth"
+							id="search"
+							type="text"
+							placeholder="Search..."
+							class="pr-6 px-5"
+						/>
 						<span class="absolute end-5 inset-y-0 flex items-center justify-center">
 							<img src="/images/common/search-icon.svg" class="size-6 text-muted-foreground" />
 						</span>
@@ -77,15 +89,21 @@
 				<TableHeader>
 					<TableRow v-for="headerGroup in table.getHeaderGroups()" :key="headerGroup.id">
 						<TableHead v-for="header in headerGroup.headers" :key="header.id">
-							<FlexRender v-if="!header.isPlaceholder" :render="header.column.columnDef.header"
-								:props="header.getContext()" />
+							<FlexRender
+								v-if="!header.isPlaceholder"
+								:render="header.column.columnDef.header"
+								:props="header.getContext()"
+							/>
 						</TableHead>
 					</TableRow>
 				</TableHeader>
 				<TableBody>
 					<template v-if="table.getRowModel().rows?.length">
-						<TableRow v-for="row in table.getRowModel().rows" :key="row.id"
-							:data-state="row.getIsSelected() && 'selected'">
+						<TableRow
+							v-for="row in table.getRowModel().rows"
+							:key="row.id"
+							:data-state="row.getIsSelected() && 'selected'"
+						>
 							<TableCell v-for="cell in row.getVisibleCells()" :key="cell.id">
 								<FlexRender :render="cell.column.columnDef.cell" :props="cell.getContext()" />
 							</TableCell>
@@ -102,6 +120,7 @@
 </template>
 
 <script setup lang="ts">
+definePageMeta({ name: "manage", middleware: "is-authenticated" });
 import type {
 	ColumnDef,
 	ColumnFiltersState,
@@ -128,7 +147,6 @@ import {
 	TableRow,
 } from "@/components/ui/table";
 import { valueUpdater } from "@/lib/utils";
-import { Search } from 'lucide-vue-next';
 
 export interface Payment {
 	id: string;

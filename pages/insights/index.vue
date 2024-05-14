@@ -4,5 +4,7 @@
 
 <script lang="ts" setup>
 definePageMeta({
+	name: "insights",
+	middleware: "is-authenticated",
 });
 </script>

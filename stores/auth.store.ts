@@ -1,3 +1,5 @@
+import { creat } from "@vueuse/core";
+
 interface AuthStore {
 	accessToken?: string | null;
 	refreshToken?: string | null;
@@ -35,7 +37,7 @@ export default defineStore("auth", {
 	}),
 	actions: {
 		async login(body: LoginRequest) {
-			return await useApi("/v3/onboarding/auth/signin", {
+			return await useApi<null>("/v3/onboarding/auth/signin", {
 				method: "post",
 				body,
 			});
@@ -43,40 +45,22 @@ export default defineStore("auth", {
 
 		async logout() {},
 
-		async verifyOtp(body: VerifyOtpRequest): Promise<VerifyOtpResponse | string> {
+		async verifyOtp(body: VerifyOtpRequest) {
 			const response = await useApi<VerifyOtpResponse>("/v1/authentication/otp/validate", {
 				method: "post",
 				body,
 			});
 
-			return response.match<VerifyOtpResponse | string>({
+			response.match<VerifyOtpResponse | string>({
 				ok: ({ data }) => {
-					// set tokens to application state
 					this.accessToken = data.token;
 					this.refreshToken = data.refreshToken;
-
-					// Init cookies for tokens
-					// and set values from response
-					const at = useCookie(ACCESS_TOKEN_KEY, {
-						expires: data.expiresAt,
-						sameSite: "strict",
-						httpOnly: true,
-						secure: true,
-					});
-					const rt = useCookie(REFRESH_TOKEN_KEY, {
-						expires: data.expiresAt,
-						sameSite: "strict",
-						httpOnly: true,
-						secure: true,
-					});
-
-					at.value = this.accessToken;
-					rt.value = this.refreshToken;
-
 					return data;
 				},
 				err: (error) => error,
 			});
+
+			return response;
 		},
 
 		isLoggedIn() {

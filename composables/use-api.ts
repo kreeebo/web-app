@@ -8,7 +8,7 @@ interface ResponseMeta {
 	errorCode: number;
 }
 
-interface Response<T> {
+export interface Response<T> {
 	meta: ResponseMeta;
 	data: T;
 }
@@ -39,6 +39,7 @@ export default async function useApi<T>(
 			return Ok(response);
 		})
 		.catch((error: FetchError<Response<null>>) => {
-			return Err(error.message);
+			console.log(error.data?.meta.message)
+			return Err(error.data?.meta.message || error.message);
 		});
 }

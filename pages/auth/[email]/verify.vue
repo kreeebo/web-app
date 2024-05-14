@@ -25,13 +25,14 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "auth" });
+definePageMeta({ layout: "auth", middleware: "redirect-if-authenticated" });
 import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
+const accessToken = useCookie<string>("at");
+const refreshToken = useCookie<string>("rt");
 const { verifyOtp } = authStore();
-
 const email = useRoute().params.email as string;
 
 const formSchema = toTypedSchema(
@@ -40,7 +41,7 @@ const formSchema = toTypedSchema(
 	})
 );
 
-const { handleSubmit, isSubmitting } = useForm({
+const { handleSubmit, isSubmitting, setErrors } = useForm({
 	validationSchema: formSchema,
 	validateOnMount: false,
 });
@@ -48,8 +49,18 @@ const { handleSubmit, isSubmitting } = useForm({
 const onSubmit = handleSubmit(async (values) => {
 	if (!email) return;
 
-	await verifyOtp({ ...values, email });
-	navigateTo("/");
+	var result = await verifyOtp({ ...values, email });
+	result.match<any>({
+		ok: ({ data }) => {
+			accessToken.value = data.token;
+			refreshToken.value = data.refreshToken;
+
+			navigateTo("/");
+		},
+		err: (value) => {
+			setErrors({ otpCode: value });
+		},
+	});
 });
 
 const submitting = computed(() => isSubmitting);

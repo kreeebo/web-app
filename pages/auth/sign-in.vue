@@ -14,6 +14,7 @@
 							label="Email"
 						/>
 					</FormControl>
+					<FormMessage />
 				</FormItem>
 			</FormField>
 			<Button
@@ -31,9 +32,14 @@
 </template>
 
 <script setup lang="ts">
-definePageMeta({ layout: "auth", pageTransition: { name: "page" } });
+definePageMeta({
+	name: "sign-in",
+	layout: "auth",
+	pageTransition: { name: "page" },
+	middleware: "redirect-if-authenticated",
+});
 
-import { Form, useForm } from "vee-validate";
+import { useForm } from "vee-validate";
 import { toTypedSchema } from "@vee-validate/zod";
 import * as z from "zod";
 
@@ -45,7 +51,7 @@ const formSchema = toTypedSchema(
 	})
 );
 
-const { handleSubmit, isSubmitting } = useForm({
+const { handleSubmit, isSubmitting, setErrors } = useForm({
 	validationSchema: formSchema,
 	validateOnMount: false,
 });
@@ -53,7 +59,17 @@ const { handleSubmit, isSubmitting } = useForm({
 const submitting = computed(() => isSubmitting);
 
 const onSubmit = handleSubmit(async (values) => {
-	await login(values);
-	// navigateTo(`/auth/${values.email}/verify`);
+	const result = await login(values);
+
+	result.match<any>({
+		ok: () => {
+			navigateTo(`/auth/${values.email}/verify`);
+			return;
+		},
+		err: (value) => {
+			setErrors({ email: value });
+			return;
+		},
+	});
 });
 </script>

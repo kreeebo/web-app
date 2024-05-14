@@ -3,6 +3,5 @@
 </template>
 
 <script lang="ts" setup>
-definePageMeta({
-});
+definePageMeta({ name: "leaderboard", middleware: "is-authenticated" });
 </script>
