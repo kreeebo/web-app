@@ -48,7 +48,7 @@ const { login } = authStore();
 const formSchema = toTypedSchema(
   z.object({
     email: z.string().email(),
-  })
+  }),
 );
 
 const { handleSubmit, isSubmitting, setErrors } = useForm({
@@ -64,11 +64,9 @@ const onSubmit = handleSubmit(async (values) => {
   result.match<any>({
     ok: () => {
       navigateTo(`/auth/${values.email}/verify`);
-      return;
     },
     err: (value) => {
       setErrors({ email: value });
-      return;
     },
   });
 });
