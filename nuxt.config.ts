@@ -41,6 +41,7 @@ export default defineNuxtConfig({
     "@pinia/nuxt",
     "dayjs-nuxt",
     "@nuxt/image",
+    "@nuxtjs/i18n"
   ],
   shadcn: {
     /**

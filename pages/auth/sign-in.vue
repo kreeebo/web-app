@@ -1,7 +1,7 @@
 <template>
   <div class="flex flex-col text-center gap-5 max-w-96 w-full">
-    <h1 class="text-5xl">Admin portal</h1>
-    <h6 class="text-base">Sign into your admin account</h6>
+    <h1 class="text-5xl">{{ $t("auth.signIn.title") }}</h1>
+    <h6 class="text-base">{{ $t("auth.signIn.subtitle") }}</h6>
 
     <form @submit="onSubmit" class="flex flex-col gap-5">
       <FormField v-slot="{ componentField }" name="email">
@@ -10,8 +10,8 @@
             <Input
               type="text"
               v-bind="componentField"
-              placeholder="Enter email address"
-              label="Email"
+              :placeholder="$t('auth.signIn.form.input.email.placeholder')"
+              :label="$t('auth.signIn.form.input.email.label')"
             />
           </FormControl>
           <FormMessage />
@@ -23,11 +23,11 @@
         :loading="submitting.value"
         :disabled="submitting.value"
       >
-        Submit
+        {{ $t("auth.signIn.form.submit") }}
       </Button>
     </form>
 
-    <NuxtLink to="/auth/sign-up">Don’t have an account? Sign up</NuxtLink>
+    <NuxtLink to="/auth/sign-up">{{ $t("auth.signIn.link.signup") }}</NuxtLink>
   </div>
 </template>
 
