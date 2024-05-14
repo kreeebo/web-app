@@ -54,6 +54,6 @@ const submitting = computed(() => isSubmitting);
 
 const onSubmit = handleSubmit(async (values) => {
 	await login(values);
-	navigateTo(`/auth/${values.email}/verify`);
+	// navigateTo(`/auth/${values.email}/verify`);
 });
 </script>

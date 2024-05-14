@@ -1,4 +1,5 @@
-const animate = require("tailwindcss-animate");
+import type { Config } from "tailwindcss";
+import animate from "tailwindcss-animate";
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -12,18 +13,11 @@ module.exports = {
 	prefix: "",
 	theme: {
 		screens: {
-			"2xl": { max: "1535px" },
-			xl: { max: "1279px" },
-			lg: { max: "1023px" },
-			md: { max: "767px" },
-			sm: { max: "639px" },
-		},
-		container: {
-			center: true,
-			padding: "2rem",
-			screens: {
-				"2xl": "1400px",
-			},
+			"2xl": { max: "1536px" },
+			xl: { max: "1280px" },
+			lg: { max: "1024px" },
+			md: { max: "768px" },
+			sm: { max: "640px" },
 		},
 		extend: {
 			fontFamily: {
@@ -45,12 +39,12 @@ module.exports = {
 			},
 			keyframes: {
 				"accordion-down": {
-					from: { height: 0 },
+					from: { height: '0' },
 					to: { height: "var(--radix-accordion-content-height)" },
 				},
 				"accordion-up": {
 					from: { height: "var(--radix-accordion-content-height)" },
-					to: { height: 0 },
+					to: { height: '0' },
 				},
 			},
 			animation: {
@@ -64,4 +58,4 @@ module.exports = {
 		},
 	},
 	plugins: [animate],
-};
+} satisfies Config;

@@ -1,4 +1,6 @@
-import type { NitroFetchOptions, NitroFetchRequest } from "nitropack";
+import { FetchError } from "ofetch";
+import { Err, Ok, type Result } from "@thames/monads";
+
 interface ResponseMeta {
 	success: boolean;
 	code: number;
@@ -15,28 +17,28 @@ export default async function useApi<T>(
 	uri: string,
 	options: Parameters<typeof $fetch<T>>[1],
 	secured?: boolean
-) {
+): Promise<Result<Response<T>, string>> {
 	const config = useRuntimeConfig();
 	const { accessToken } = authStore();
 
-	try {
-		const instance = $fetch.create<Response<T>>({
-			...options,
-			baseURL: config.public.apiBaseUrl,
-			onRequest: (ctx) => {
-				if (secured) {
-					ctx.options.headers = {
-						Authoritzation: `Bearer ${accessToken}`,
-					};
-				}
-			},
-			onResponse: (ctx) => {},
-			onResponseError: (ctx) => {},
-			onRequestError(ctx) {},
+	const instance = $fetch.create<Response<T>>({
+		...options,
+		baseURL: config.public.apiBaseUrl,
+		onRequest: (ctx) => {
+			if (secured) {
+				ctx.options.headers = {
+					Authoritzation: `Bearer ${accessToken}`,
+				};
+			}
+		},
+		onResponse: (ctx) => {},
+	});
+
+	return instance(uri)
+		.then((response) => {
+			return Ok(response);
+		})
+		.catch((error: FetchError<Response<null>>) => {
+			return Err(error.message);
 		});
-		const { data } = await instance(uri);
-		return data;
-	} catch (e) {
-		console.error(e);
-	}
 }
