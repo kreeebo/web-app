@@ -7,11 +7,9 @@ export const buttonVariants = cva(
   {
     variants: {
       variant: {
-        default:
+        filled:
           "bg-chartreuse dark:bg-chartreuse dark:text-eerie-black dark:hover:bg-chartreuse/90",
-        destructive:
-          "bg-red-500 text-slate-50 hover:bg-red-500/90 dark:bg-red-900 dark:text-slate-50 dark:hover:bg-red-900/90",
-        outline:
+        outlined:
           "border border-white bg-transparent hover:bg-white hover:text-eerie-black dark:border-white dark:bg-transparent dark:hover:bg-white dark:hover:text-eerie-black transition-colors",
         secondary:
           "bg-slate-100 text-slate-900 hover:bg-slate-100/80 dark:bg-slate-800 dark:text-slate-50 dark:hover:bg-slate-800/80",
@@ -20,15 +18,14 @@ export const buttonVariants = cva(
         link: "text-slate-900 underline-offset-4 hover:underline dark:text-slate-50",
       },
       size: {
-        default: "h-12 rounded-5xl px-8 w-1/2 py-2",
-        sm: "h-9 rounded-md px-3",
-        lg: "h-12 px-8",
-        icon: "h-10 w-10",
+        lg: "h-[3.75rem]",
+        md: "h-12",
+        sm: "h-8",
       },
     },
     defaultVariants: {
-      variant: "default",
-      size: "default",
+      variant: "filled",
+      size: "md",
     },
   },
 );

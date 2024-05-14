@@ -22,9 +22,9 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <template>
   <SelectItem v-bind="forwardedProps" :class="cn(selectItemVariants({ variant }), props.class)">
-    <span class="tw-absolute tw-left-2 tw-flex tw-h-3.5 tw-w-3.5 tw-items-center tw-justify-center">
+    <span class="absolute left-2 flex h-3.5 w-3.5 items-center justify-center">
       <SelectItemIndicator>
-        <!-- <Check class="tw-h-4 tw-w-4" /> -->
+        <!-- <Check class="h-4 w-4" /> -->
       </SelectItemIndicator>
     </span>
 

@@ -13,17 +13,17 @@ export { default as SelectScrollUpButton } from "./SelectScrollUpButton.vue";
 export { default as SelectScrollDownButton } from "./SelectScrollDownButton.vue";
 
 export const selectContentVariants = cva(
-  `tw-relative tw-z-50 tw-max-h-96 tw-min-w-32 tw-overflow-hidden
-    tw-rounded-2xl 
-    tw-text-base tw-data-[state=open]:animate-in tw-py-4
-    data-[state=closed]:tw-animate-out data-[state=closed]:tw-fade-out-0 
-    data-[state=open]:tw-fade-in-0 data-[state=closed]:tw-zoom-out-95 data-[state=open]:tw-zoom-in-95 
-    data-[side=bottom]:tw-slide-in-from-top-2 data-[side=left]:tw-slide-in-from-right-2 
-    data-[side=right]:tw-slide-in-from-left-2 data-[side=top]:-tw-slide-in-from-bottom-2`,
+  `relative z-50 max-h-96 min-w-32 overflow-hidden
+    rounded-2xl 
+    text-base data-[state=open]:animate-in py-4
+    data-[state=closed]:animate-out data-[state=closed]:fade-out-0 
+    data-[state=open]:fade-in-0 data-[state=closed]:zoom-out-95 data-[state=open]:zoom-in-95 
+    data-[side=bottom]:slide-in-from-top-2 data-[side=left]:slide-in-from-right-2 
+    data-[side=right]:slide-in-from-left-2 data-[side=top]:-slide-in-from-bottom-2`,
   {
     variants: {
       variant: {
-        outlined: "tw-bg-[#3D3D3D] tw-text-white",
+        outlined: "bg-[#3D3D3D] text-white",
       },
     },
     defaultVariants: {
@@ -33,31 +33,33 @@ export const selectContentVariants = cva(
 );
 
 export const selectTriggerVariants = cva(
-  `tw-flex tw-h-10 tw-w-full tw-items-center tw-justify-between data-[disabled]:tw-opacity-60 data-[disabled]:tw-cursor-not-allowed
-      tw-px-8 tw-pr-0 tw-py-2 tw-text-base tw-max-w-max focus:tw-outline-none`,
+  `flex h-10 w-full items-center justify-between data-[disabled]:opacity-60 data-[disabled]:cursor-not-allowed
+      px-8 pr-0 py-2 text-base max-w-max focus:outline-none`,
   {
     variants: {
       variant: {
-        outlined: "tw-border tw-border-white tw-border-solid tw-rounded-[2rem]",
-        solid: "ts",
+        outlined: "border border-white border-solid rounded-[2rem]",
+        filled: "ts",
       },
       size: {
-        md: "tw-h-12",
+        lg: "h-[3.75rem]",
+        md: "h-12",
+        sm: "h-8",
       },
     },
     defaultVariants: {
-      variant: "solid",
+      variant: "filled",
       size: "md",
     },
   },
 );
 
 export const selectItemVariants = cva(
-  "tw-relative tw-flex tw-cursor-default tw-select-none tw-items-start tw-rounded tw-py-1.5 tw-mx-4 tw-px-4 tw-outline-none focus:tw-bg-jet-black focus:tw-text-white data-[disabled]:tw-cursor-not-allowed data-[disabled]:tw-opacity-50",
+  "relative flex cursor-default select-none items-start rounded py-1.5 mx-4 px-4 outline-none focus:bg-jet-black focus:text-white data-[disabled]:cursor-not-allowed data-[disabled]:opacity-50",
   {
     variants: {
       variant: {
-        outline: "focus:tw-bg-jet-black",
+        outline: "focus:bg-jet-black",
       },
     },
     defaultVariants: {

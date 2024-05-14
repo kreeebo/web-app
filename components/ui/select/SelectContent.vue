@@ -39,14 +39,14 @@ const forwarded = useForwardPropsEmits(delegatedProps, emits);
         cn(
           selectContentVariants({ variant }),
           position === 'popper' &&
-            `tw-data-[side=bottom]:translate-y-1 tw-data-[side=left]:-translate-x-1 tw-data-[side=right]:translate-x-1 tw-data-[side=top]:-translate-y-1`,
+            `data-[side=bottom]:translate-y-1 data-[side=left]:-translate-x-1 data-[side=right]:translate-x-1 data-[side=top]:-translate-y-1`,
           props.class
         )
       "
     >
       <SelectScrollUpButton />
       <SelectViewport
-        :class="cn('tw-p-1', position === 'popper' && 'tw-h-[--radix-select-trigger-height] tw-w-full tw-min-w-[--radix-select-trigger-width]')"
+        :class="cn('p-1', position === 'popper' && 'h-[--radix-select-trigger-height] w-full min-w-[--radix-select-trigger-width]')"
       >
         <slot />
       </SelectViewport>

@@ -25,11 +25,11 @@ const forwardedProps = useForwardProps(delegatedProps);
 
 <template>
   <SelectTrigger v-bind="forwardedProps" :class="cn(selectTriggerVariants({ variant, size }), props.class)">
-    <span class="tw-pr-1" v-if="prefix">{{ prefix }}</span
+    <span class="pr-1" v-if="prefix">{{ prefix }}</span
     ><slot />
     <SelectIcon as-child>
-      <!-- <v-img class="tw-w-6 tw-h-6 tw-opacity-50 mx-2" src="/images/icons/chevron.svg" /> -->
-      <ChevronDown class="tw-w-6 tw-h-6 mx-2 tw-opacity-50" />
+      <!-- <v-img class="w-6 h-6 opacity-50 mx-2" src="/images/icons/chevron.svg" /> -->
+      <ChevronDown class="w-6 h-6 mx-2 opacity-50" />
     </SelectIcon>
   </SelectTrigger>
 </template>
