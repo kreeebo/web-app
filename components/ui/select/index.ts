@@ -1,16 +1,16 @@
-import { type VariantProps, cva } from 'class-variance-authority';
+import { type VariantProps, cva } from "class-variance-authority";
 
-export { default as Select } from './Select.vue';
-export { default as SelectValue } from './SelectValue.vue';
-export { default as SelectTrigger } from './SelectTrigger.vue';
-export { default as SelectContent } from './SelectContent.vue';
-export { default as SelectGroup } from './SelectGroup.vue';
-export { default as SelectItem } from './SelectItem.vue';
-export { default as SelectItemText } from './SelectItemText.vue';
-export { default as SelectLabel } from './SelectLabel.vue';
-export { default as SelectSeparator } from './SelectSeparator.vue';
-export { default as SelectScrollUpButton } from './SelectScrollUpButton.vue';
-export { default as SelectScrollDownButton } from './SelectScrollDownButton.vue';
+export { default as Select } from "./Select.vue";
+export { default as SelectValue } from "./SelectValue.vue";
+export { default as SelectTrigger } from "./SelectTrigger.vue";
+export { default as SelectContent } from "./SelectContent.vue";
+export { default as SelectGroup } from "./SelectGroup.vue";
+export { default as SelectItem } from "./SelectItem.vue";
+export { default as SelectItemText } from "./SelectItemText.vue";
+export { default as SelectLabel } from "./SelectLabel.vue";
+export { default as SelectSeparator } from "./SelectSeparator.vue";
+export { default as SelectScrollUpButton } from "./SelectScrollUpButton.vue";
+export { default as SelectScrollDownButton } from "./SelectScrollDownButton.vue";
 
 export const selectContentVariants = cva(
   `tw-relative tw-z-50 tw-max-h-96 tw-min-w-32 tw-overflow-hidden
@@ -23,13 +23,13 @@ export const selectContentVariants = cva(
   {
     variants: {
       variant: {
-        outlined: 'tw-bg-[#3D3D3D] tw-text-white',
+        outlined: "tw-bg-[#3D3D3D] tw-text-white",
       },
     },
     defaultVariants: {
-      variant: 'outlined',
+      variant: "outlined",
     },
-  }
+  },
 );
 
 export const selectTriggerVariants = cva(
@@ -38,32 +38,32 @@ export const selectTriggerVariants = cva(
   {
     variants: {
       variant: {
-        outlined: 'tw-border tw-border-white tw-border-solid tw-rounded-[2rem]',
-        solid: 'ts',
+        outlined: "tw-border tw-border-white tw-border-solid tw-rounded-[2rem]",
+        solid: "ts",
       },
       size: {
-        md: 'tw-h-12',
+        md: "tw-h-12",
       },
     },
     defaultVariants: {
-      variant: 'solid',
-      size: 'md',
+      variant: "solid",
+      size: "md",
     },
-  }
+  },
 );
 
 export const selectItemVariants = cva(
-  'tw-relative tw-flex tw-cursor-default tw-select-none tw-items-start tw-rounded tw-py-1.5 tw-mx-4 tw-px-4 tw-outline-none focus:tw-bg-jet-black focus:tw-text-white data-[disabled]:tw-cursor-not-allowed data-[disabled]:tw-opacity-50',
+  "tw-relative tw-flex tw-cursor-default tw-select-none tw-items-start tw-rounded tw-py-1.5 tw-mx-4 tw-px-4 tw-outline-none focus:tw-bg-jet-black focus:tw-text-white data-[disabled]:tw-cursor-not-allowed data-[disabled]:tw-opacity-50",
   {
     variants: {
       variant: {
-        outline: 'focus:tw-bg-jet-black',
+        outline: "focus:tw-bg-jet-black",
       },
     },
     defaultVariants: {
-      variant: 'outline',
+      variant: "outline",
     },
-  }
+  },
 );
 
 export type SelectTriggerVariants = VariantProps<typeof selectTriggerVariants>;

@@ -1,6 +1,6 @@
 export default defineNuxtRouteMiddleware((to, from) => {
-	const auth = authStore();
-	const hasCredentials = auth.isLoggedIn();
+  const auth = authStore();
+  const hasCredentials = auth.isLoggedIn();
 
-	if (hasCredentials) return navigateTo({ name: "home" });
+  if (hasCredentials) return navigateTo({ name: "home" });
 });
